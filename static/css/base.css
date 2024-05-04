@@ -85,19 +85,15 @@ iframe {
 .footer {
     background-color: #01386A;
     color: white;
-    padding: 20px 0;
     text-align: center;
     width: 100%;
 }
 
-.footer .container p {
-    color: white;
-}
 
 .footer i {
     font-size: 200%;
     color: white;
-    margin: 10px;
+    margin: 10px auto;
 }
 
 /* Media Queeries */

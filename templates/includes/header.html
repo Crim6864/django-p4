@@ -4,7 +4,7 @@
     <nav class="navbar navbar-expand-lg">
         <!-- logo -->
         <img src="{% static 'images/KGlogga.webp' %}" class="img-fluid" alt="Your Logo" width="100px" height="100px">
-        <a class="navbar-brand" href="index.html">Kils Gymnaster</a>
+        <a class="navbar-brand" href="{% url 'home' %}">Kils Gymnaster</a>
         <button class="navbar-toggler ms-auto" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -12,24 +12,101 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav text-center ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Hem</a>
+                    <a class="nav-link" href="{% url 'home' %}">Hem</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="traning.html">Träning</a>
+                    <a class="nav-link" href="{% url 'traning' %}">Träning</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about.html">Om oss</a>
+                    <a class="nav-link" href="{% url 'om' %}">Om oss</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Kontakt</a>
+                    <a class="nav-link" href="{% url 'contact' %}">Kontakt</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="calender.html">Kalender</a>
+                    <a class="nav-link" href="{% url 'calender' %}">Kalender</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://www.tifosi.se/kilsgymnaster">Webbshop</a>
+                    <a class="nav-link" href="https://www.tifosi.se/kilsgymnaster" target="_blank">Webbshop</a>
                 </li>
-            </ul>
+                <li class="nav-item">
+                    {% if user.is_authenticated %}
+                        <a class="btn btn-link nav-link" href="{% url 'account_logout' %}">Logga ut</a>
+                    {% else %}
+                    <button type="button" class="btn btn-link nav-link" data-toggle="modal" data-target="#loginModal">Logga in / Registrera</button>
+                    {% endif %}
+                </li>
         </div>
     </nav>
 </header>
+
+<!-- Login/Register Modal -->
+<div class="modal fade" id="loginRegisterModal" tabindex="-1" role="dialog" aria-labelledby="loginRegisterModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginRegisterModalLabel">Logga in / Registrera</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Login/Register tabs -->
+                <ul class="nav nav-tabs" id="loginRegisterTabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Logga in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">Registrera</a>
+                    </li>
+                </ul>
+
+                <!-- Login/Register tab content -->
+                <div class="tab-content" id="loginRegisterTabContent">
+                    <!-- Login form -->
+                    <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                        <form id="loginForm" method="post" action="{% url 'account_login' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="login_username">Användarnamn</label>
+                                <input type="text" class="form-control" id="login_username" name="login_username">
+                            </div>
+                            <div class="form-group">
+                                <label for="login_password">Lösenord</label>
+                                <input type="password" class="form-control" id="login_password" name="login_password">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Logga in</button>
+                        </form>
+                    </div>
+                    <!-- Register form -->
+                    <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                        <form id="registerForm" method="post" action="{% url 'account_signup' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="register_username">Användarnamn</label>
+                                <input type="text" class="form-control" id="register_username" name="register_username">
+                            </div>
+                            <div class="form-group">
+                                <label for="register_email">E-post</label>
+                                <input type="email" class="form-control" id="register_email" name="register_email">
+                            </div>
+                            <div class="form-group">
+                                <label for="register_password1">Lösenord</label>
+                                <input type="password" class="form-control" id="register_password1" name="register_password1">
+                            </div>
+                            <div class="form-group">
+                                <label for="register_password2">Bekräfta lösenord</label>
+                                <input type="password" class="form-control" id="register_password2" name="register_password2">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Registrera</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="{% static 'js/modal.js' %}"></script>
