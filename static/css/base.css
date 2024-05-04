@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Set minimum height to 100% of the viewport height */
+    background-color: #F4F6F6;
+}
+
+.navbar {
+    background-color: #01386A;
+    box-shadow: 3px 3px 3px #1bace4;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.navbar-brand {
+    font-size: 180%;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px white, 1px 1px 10px #e41b97;
+    text-transform: uppercase;
+}
+
+.navbar-nav a {
+    font-size: 110%;
+    color: white;
+}
+
+.navbar-toggler {
+	background-color: white;
+}
+
+.navbar-toggler-icon {
+	background-color: white;
+}
+
+img {
+    margin: 10px;
+}
+
+p, a {
+    color: black;
+}
+
+/* Content */
+
+.container h1, h2, p, a {
+    color: black;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    font-size: 110%;
+}
+
+.container {
+    flex: 1; /* Make the container fill remaining vertical space */
+}
+
+.container h1 {
+    background-color: #1bace4;
+    box-shadow: 5px 5px 5px #01386A;
+    margin-top: 10px;
+    font-size: 180%;
+    padding: 2px;
+}
+
+iframe {
+    width: 90vw;
+    height: 90vw;
+	max-width: 800px;
+	max-height: 600px;
+}
+
+/* About */
+
+.photos h2 {
+    font-style: italic;
+}
+
+/* Footer */
+
+.footer {
+    background-color: #01386A;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.footer .container p {
+    color: white;
+}
+
+.footer i {
+    font-size: 200%;
+    color: white;
+    margin: 10px;
+}
+
+/* Media Queeries */
+
+@media (min-width: 767px) {
+	hr {
+		display: none;
+	}
+}
+
+@media (min-width: 1439px) {
+    .navbar {
+        display: flex;
+        justify-content: space-evenly;
+		font-size: 160%;
+    }
+
+    .navbar-nav {
+        margin: auto;
+    }
+}
