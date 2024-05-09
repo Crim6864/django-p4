@@ -12,26 +12,29 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav text-center ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'home' %}">Hem</a>
+                    <a class="nav-link {% if url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Hem</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'traning' %}">Träning</a>
+                    <a class="nav-link {% if url_name == 'traning' %}active{% endif %}" href="{% url 'traning' %}">Träning</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'om' %}">Om oss</a>
+                    <a class="nav-link {% if url_name == 'om' %}active{% endif %}" href="{% url 'om' %}">Om oss</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'contact' %}">Kontakt</a>
+                    <a class="nav-link {% if url_name == 'contact' %}active{% endif %}" href="{% url 'contact' %}">Kontakt</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'calender' %}">Kalender</a>
+                    <a class="nav-link {% if url_name == 'calender' %}active{% endif %}" href="{% url 'calender' %}">Kalender</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://www.tifosi.se/kilsgymnaster" target="_blank">Webbshop</a>
                 </li>
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                    <a class="nav-link" href="{% url 'profile' request.user.id %}">Min Profil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
