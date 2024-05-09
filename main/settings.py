@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
     # My apps
     'home',
     'dashboard',
@@ -47,6 +48,9 @@ INSTALLED_APPS = [
     # Allauth
     'allauth',
     'allauth.account',
+
+    # Custom
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +73,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'dashboard', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -106,16 +111,13 @@ DATABASES = {
     }
 }
 
-
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-)
-
 # django-allauth settings
-LOGIN_REDIRECT_URL = 'dashboard:profile'
+LOGIN_REDIRECT_URL = 'profile'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 SITE_ID = 1  # Required by allauth
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
