@@ -6,7 +6,7 @@
         {% include 'dashboard/menu.html' %}
         <div class="col-sm12 col-md-9 user-board">
             <h1>Welcome, {{ user.first_name }}!</h1>
-            <h1>Add Gymnast Information</h1>
+            <h1>Lägg till din Gymnast</h1>
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}

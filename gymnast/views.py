@@ -11,22 +11,16 @@ from .forms import GymnastForm
 class AddGymnastView(LoginRequiredMixin, CreateView):
     template_name = 'gymnast/add_gymnast.html'
     form_class = GymnastForm
-    success_url = reverse_lazy('profile')  # Change 'profile' to the appropriate URL name
+    success_url = reverse_lazy('profile:profile')  # Update to use the correct namespace
 
     def form_valid(self, form):
+        form.instance.user = self.request.user  # Set the user field to the current user
         form.instance.parent1 = self.request.user
-        second_parent_id = self.request.POST.get('second_parent_id')
-        if second_parent_id:
-            gymnast = form.save()
-            second_parent = User.objects.filter(pk=second_parent_id).first()
-            gymnast.parent2 = second_parent
-            gymnast.save()
-        else:
-            form.instance.parent2 = None  # Ensure parent2 is None if not provided
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('profile')  # Change 'profile' to the appropriate URL name
+        # Generate the URL for the profile page of the current user
+        return reverse_lazy('profile:profile', kwargs={'pk': self.request.user.pk})
 
 class EditGymnastView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """Edit a Gymnast"""
@@ -45,4 +39,4 @@ class EditGymnastView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def get_success_url(self):
         """Return the URL to redirect to after processing a valid form."""
-        return reverse_lazy('profile', kwargs={'pk': self.object.pk})
+        return reverse_lazy('profile', kwargs={'pk': self.kwargs['pk']})

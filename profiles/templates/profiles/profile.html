@@ -8,7 +8,7 @@
     <div class="row">
         {% include 'dashboard/menu.html' %}
         <div class="col-sm-12 col-md-9 user-board">
-            <h1>Welcome, {{ user.first_name }}!</h1>
+            <h1>Welcome, {{ request.user.profile.förnamn }}!</h1>
             <p>Gick Med: {{ user.date_joined|date:'d M Y' }}</p>
             <hr>
             {% if request.user.is_authenticated %}

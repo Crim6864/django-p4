@@ -12,19 +12,3 @@ class SignupView(TemplateView):
 
 class LogoutView(TemplateView):
     template_name = 'users/logout.html'
-
-
-
-def ajax_login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return JsonResponse({'success': True, 'redirect_url': '/dashboard/'})
-        else:
-            return JsonResponse({'success': False, 'error': 'Invalid username or password.'})
-    else:
-        return JsonResponse({'success': False, 'error': 'Only POST requests are allowed.'})
-

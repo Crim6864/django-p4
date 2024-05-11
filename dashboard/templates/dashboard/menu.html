@@ -25,6 +25,14 @@
         {% if user.is_staff %}
         <hr>
         <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin:index' %}">Flytta Gymnast</a>
+        </li>
+        <hr>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin:index' %}">Ta bort Gymnast</a>
+        </li>
+        <hr>
+        <li class="nav-item">
             <a class="nav-link" href="{% url 'admin:index' %}">Admin Panel</a>
         </li>
     {% endif %}

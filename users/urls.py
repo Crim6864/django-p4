@@ -1,6 +1,8 @@
 from django.urls import path
-from .views import ajax_login
+from .views import LoginView, SignupView, LogoutView
 
 urlpatterns = [
-    path('ajax/login/', ajax_login, name='ajax_login'),
+    path('login/', LoginView.as_view(), name='login'),
+    path('signup/', SignupView.as_view(), name='signup'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]
