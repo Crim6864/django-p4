@@ -25,4 +25,5 @@ urlpatterns = [
     path('profile/', include('profiles.urls')),                     # Include URLs for the profile app
     path('dashboard/', include('dashboard.urls')),                  # Include URLs for the dashboard app
     path('gymnast/', include('gymnast.urls')),                       # Include URLs for the gymnast app
+    path('users/', include('users.urls')),                       # Include URLs for the gymnast app
 ]
