@@ -67,6 +67,9 @@ MIDDLEWARE = [
 
     #Allauth
     "allauth.account.middleware.AccountMiddleware",
+
+    #Whitenoise
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'main.urls'
@@ -125,6 +128,7 @@ ACCOUNT_USERNAME_REQUIRED = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Media files (user-uploaded content)
 MEDIA_URL = '/media/'
