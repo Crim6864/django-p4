@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1:8000', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -43,6 +43,9 @@ INSTALLED_APPS = [
 
     # My apps
     'home',
+    'users',
+    'profiles',
+    'gymnast',
     'dashboard',
 
     # Allauth
@@ -73,7 +76,6 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-            os.path.join(BASE_DIR, 'dashboard', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -116,7 +118,8 @@ LOGIN_REDIRECT_URL = 'profile'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 SITE_ID = 1  # Required by allauth
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
-ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_USERNAME_REQUIRED = True
 
 # Static files (CSS, JavaScript, Images)

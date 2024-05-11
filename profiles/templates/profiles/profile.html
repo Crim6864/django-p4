@@ -1,0 +1,33 @@
+<!-- profile.html -->
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <div class="row">
+        {% include 'dashboard/menu.html' %}
+        <div class="col-sm-12 col-md-9 user-board">
+            <h1>Welcome, {{ user.first_name }}!</h1>
+            <p>Gick Med: {{ user.date_joined|date:'d M Y' }}</p>
+            <hr>
+            {% if request.user.is_authenticated %}
+            {% if request.user.profile %}
+                <!-- Profile exists, so display its fields -->
+                <p>Förnamn: {{ request.user.profile.förnamn }}</p>
+                <p>Efternamn: {{ request.user.profile.efternamn }}</p>
+                <p>Adress: {{ request.user.profile.adress }}</p>
+                <p>Telefon: {{ request.user.profile.telefon }}</p>
+                <!-- Add other profile fields as needed -->
+            {% else %}
+                <!-- Profile doesn't exist -->
+                <p>No profile found for this user.</p>
+            {% endif %}
+        {% else %}
+            <!-- User is not authenticated -->
+            <p>User is not authenticated.</p>
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

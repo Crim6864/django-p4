@@ -32,7 +32,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--main);
+    font-family: 'Osawld', sans-serif;
 }
 
 p, a {
@@ -48,6 +48,7 @@ main {
 /* Container */
 
 .container h1 {
+    font-family: 'Osawld', sans-serif;
     background-color: #1bace4;
     box-shadow: 5px 5px 5px #01386A;
     margin-top: 10px;
@@ -86,6 +87,7 @@ footer {
 /* Header */
 
 .navbar {
+    font-family: 'Osawld', sans-serif;
     background-color: var(--ksg);
     box-shadow: var(--boxshadow);
     margin-bottom: 20px;
@@ -101,6 +103,7 @@ footer {
 }
 
 a.nav-link {
+    font-family: 'Osawld', sans-serif;
     color: var(--white);
     font-size: 140%;
 }
@@ -156,6 +159,19 @@ a.nav-link {
     text-decoration: underline;
 }
 
+/* User Menu */
+
+.user-board p {
+    font-family: 'Osawld', sans-serif;
+    margin-top: 30px;
+    font-size: 160%;
+    text-align: left;
+}
+
 .user-menu .nav-link {
+    font-family: 'Osawld', sans-serif;
     color: black;
+    text-align: left;
+    font-size: 160%;
+    margin-top: 5px;
 }

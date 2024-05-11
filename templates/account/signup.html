@@ -5,6 +5,8 @@
     <h2>Register</h2>
     <form method="post" action="{% url 'account_signup' %}" class="form">
         {% csrf_token %}
+        <!-- Hidden input field to store the URL of the profile page -->
+        <input type="hidden" name="next" value="{% url 'profile' request.user.pk %}">
         <div class="form-group">
             {{ form.username|add_class:"form-control" }}
         </div>

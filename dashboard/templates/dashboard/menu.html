@@ -1,0 +1,32 @@
+<!-- menu.html -->
+<div class="col-sm12 col-md-3 user-menu">
+    <h1>Profil Menu</h1>
+    <ul class="navbar-nav text-center ml-auto">
+        <li class="nav-item active">
+            <a class="nav-link {% if url_name == 'profile' %}active{% endif %}" href="{% url 'profile' request.user.id %}">Hem</a>
+        </li>
+        <hr>
+        <li class="nav-item">
+            {% if request.user.profile %}
+                <a class="nav-link {% if url_name == 'edit_profile' %}active{% endif %}" href="{% url 'edit_profile' request.user.id %}">Redigera Profil</a>
+            {% endif %}
+        </li>
+        {% if request.user.gymnast_profile.all %}
+            <hr>
+            <li class="nav-item">
+                <a class="nav-link {% if url_name == 'edit_gymnast' %}active{% endif %}" href="{% url 'edit_gymnast' request.user.id %}">Redigera Gymnast</a>
+            </li>
+        {% else %}
+            <hr>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'add_gymnast' %}">Lägg till Gymnast</a>
+            </li>
+        {% endif %}
+        {% if user.is_staff %}
+        <hr>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin:index' %}">Admin Panel</a>
+        </li>
+    {% endif %}
+    </ul>
+</div>
