@@ -6,14 +6,12 @@
         {% include 'dashboard/menu.html' %}
         <div class="col-sm-12 col-md-9 user-board">
             <h1>Welcome, {{ request.user.profile.förnamn }}!</h1>
-            <h1>Lägg till din Gymnast</h1>
+            <h1>Delete Gymnast</h1>
+            <p>Are you sure you want to delete {{ object.förnamn }} {{ object.efternamn }}?</p>
             <form method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
-                {% if user.is_staff and second_parent %}
-                    <input type="hidden" name="parent2" value="{{ second_parent.id }}">
-                {% endif %}
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-danger">Delete Gymnast</button>
+                <a href="{% url 'profile' request.user.pk %}" class="btn btn-secondary">Cancel</a>
             </form>
         </div>
     </div>

@@ -19,6 +19,15 @@
                 <p>Adress: {{ request.user.profile.adress }}</p>
                 <p>Telefon: {{ request.user.profile.telefon }}</p>
                 <!-- Add other profile fields as needed -->
+            <hr>
+            {% for gymnast in gymnasts %}
+            <h2> Mina Gymnaster </h2>
+            <p><strong>Namn:</strong> {{ gymnast.förnamn }} {{ gymnast.efternamn }}</p>
+            <p><strong>Ålder:</strong> {{ gymnast.personnummer }}</p>
+            <p><strong>Grupp:</strong> {{ gymnast.grupp }}</p>
+            {% empty %}
+            <p>No gymnasts found.</p>
+            {% endfor %}
             {% else %}
                 <!-- Profile doesn't exist -->
                 <p>No profile found for this user.</p>

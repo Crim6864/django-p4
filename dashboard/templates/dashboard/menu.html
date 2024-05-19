@@ -1,5 +1,5 @@
 <!-- menu.html -->
-<div class="col-sm12 col-md-3 user-menu">
+<div class="col-sm-12 col-md-3 user-menu">
     <h1>Profil Menu</h1>
     <ul class="navbar-nav text-center ml-auto">
         <li class="nav-item active">
@@ -11,30 +11,35 @@
                 <a class="nav-link {% if url_name == 'edit_profile' %}active{% endif %}" href="{% url 'edit_profile' request.user.id %}">Redigera Profil</a>
             {% endif %}
         </li>
-        {% if request.user.gymnast_profile.all %}
+        <hr>
+        <li class="nav-item">
+            {% if request.user.gymnast_profile.all %}
+                <a class="nav-link {% if url_name == 'view_gymnast' %}active{% endif %}" href="{% url 'view_gymnast' request.user.gymnast_profile.first.id %}">Visa Gymnast</a>
+            {% else %}
+                <a class="nav-link {% if url_name == 'add_gymnast' %}active{% endif %}" href="{% url 'add_gymnast' %}">Lägg till Gymnast</a>
+            {% endif %}
+        </li>
+        {% if user.is_staff %}
             <hr>
             <li class="nav-item">
-                <a class="nav-link {% if url_name == 'edit_gymnast' %}active{% endif %}" href="{% url 'edit_gymnast' request.user.id %}">Redigera Gymnast</a>
+                {% if request.user.gymnast_profile.all %}
+                    <a class="nav-link" href="{% url 'move_gymnast' request.user.gymnast_profile.first.id %}">Flytta Gymnast</a>
+                {% else %}
+                    <a class="nav-link disabled" href="#">Flytta Gymnast</a>
+                {% endif %}
             </li>
-        {% else %}
             <hr>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'add_gymnast' %}">Lägg till Gymnast</a>
+                {% if request.user.gymnast_profile.all %}
+                    <a class="nav-link" href="{% url 'delete_gymnast' request.user.gymnast_profile.first.id %}">Ta bort Gymnast</a>
+                {% else %}
+                    <a class="nav-link disabled" href="#">Ta bort Gymnast</a>
+                {% endif %}
+            </li>
+            <hr>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'admin:index' %}">Admin Panel</a>
             </li>
         {% endif %}
-        {% if user.is_staff %}
-        <hr>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'admin:index' %}">Flytta Gymnast</a>
-        </li>
-        <hr>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'admin:index' %}">Ta bort Gymnast</a>
-        </li>
-        <hr>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'admin:index' %}">Admin Panel</a>
-        </li>
-    {% endif %}
     </ul>
 </div>
