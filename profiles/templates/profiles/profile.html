@@ -14,20 +14,24 @@
             {% if request.user.is_authenticated %}
             {% if request.user.profile %}
                 <!-- Profile exists, so display its fields -->
-                <p>Förnamn: {{ request.user.profile.förnamn }}</p>
-                <p>Efternamn: {{ request.user.profile.efternamn }}</p>
-                <p>Adress: {{ request.user.profile.adress }}</p>
-                <p>Telefon: {{ request.user.profile.telefon }}</p>
+                <p><strong>Förnamn:</strong> {{ request.user.profile.förnamn }}</p>
+                <p><strong>Efternamn:</strong> {{ request.user.profile.efternamn }}</p>
+                <p><strong>Adress:</strong> {{ request.user.profile.adress }}</p>
+                <p><strong>Telefon:</strong> {{ request.user.profile.telefon }}</p>
                 <!-- Add other profile fields as needed -->
             <hr>
+            <h1>Mina Gymnaster</h1>
             {% for gymnast in gymnasts %}
-            <h2> Mina Gymnaster </h2>
-            <p><strong>Namn:</strong> {{ gymnast.förnamn }} {{ gymnast.efternamn }}</p>
-            <p><strong>Ålder:</strong> {{ gymnast.personnummer }}</p>
-            <p><strong>Grupp:</strong> {{ gymnast.grupp }}</p>
-            {% empty %}
+            <div class="gymnast-detail">
+                <p><strong>Namn:</strong> {{ gymnast.förnamn }} {{ gymnast.efternamn }}</p>
+                <p><strong>Personnummer:</strong> {{ gymnast.personnummer }}</p>
+                <p><strong>Grupp:</strong> {{ gymnast.grupp }}</p>
+            </div>
+            <hr>
+        {% empty %}
             <p>No gymnasts found.</p>
-            {% endfor %}
+        {% endfor %}
+            </div>
             {% else %}
                 <!-- Profile doesn't exist -->
                 <p>No profile found for this user.</p>

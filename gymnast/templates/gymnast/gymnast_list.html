@@ -3,18 +3,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <h1>Gymnast Details</h1>
+<div class="container text-center">
+    <div class="row">
+    {% include 'dashboard/menu.html' %}
+    <div class="col-sm12 col-md-9 user-board">
+    <h1>Mina Gymnaster</h1>
     {% for gymnast in gymnasts %}
-        <div class="gymnast-detail">
-            <p><strong>Name:</strong> {{ gymnast.förnamn }} {{ gymnast.efternamn }}</p>
-            <p><strong>Age:</strong> {{ gymnast.personnummer }}</p>
-            <p><strong>Group:</strong> {{ gymnast.grupp }}</p>
-            <a href="{% url 'edit_gymnast' gymnast.id %}" class="btn btn-primary">Edit</a>
-        </div>
-        <hr>
-    {% empty %}
-        <p>No gymnasts found.</p>
-    {% endfor %}
+    <div class="gymnast-detail">
+        <p><strong>Namn:</strong> {{ gymnast.förnamn }} {{ gymnast.efternamn }}</p>
+        <p><strong>Personnummer:</strong> {{ gymnast.personnummer }}</p>
+        <p><strong>Grupp:</strong> {{ gymnast.grupp }}</p>
+        <a href="{% url 'edit_gymnast' gymnast.id %}" class="btn btn-primary">Edit</a>
+    </div>
+    <hr>
+{% empty %}
+    <p>No gymnasts found.</p>
+{% endfor %}
 </div>
 {% endblock %}

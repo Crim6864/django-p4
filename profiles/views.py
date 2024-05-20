@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 
+from gymnast.models import Gymnast
 from .models import Profile
 from .forms import ProfileForm
 
@@ -16,9 +17,13 @@ class ProfileView(TemplateView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         profile = None
+        gymnasts = None  # Initialize gymnasts to None
         if hasattr(user, 'profile'):
             profile = user.profile
+            # Fetch gymnasts associated with the current user
+            gymnasts = Gymnast.objects.filter(user=user)
         context['profile'] = profile
+        context['gymnasts'] = gymnasts  # Pass gymnasts to the context
         return context
 
 class EditProfile(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

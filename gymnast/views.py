@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.views.generic.list import ListView
+from django.db.models import Q
 from .models import Gymnast
 from .forms import GymnastForm
 
@@ -53,6 +54,11 @@ class DeleteGymnastView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         return self.request.user.is_superuser
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['gymnasts'] = Gymnast.objects.all()  # Retrieve all gymnasts
+        return context
+
 class MoveGymnastView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Gymnast
     form_class = GymnastForm
@@ -70,4 +76,5 @@ class ViewGymnastView(LoginRequiredMixin, ListView):
     context_object_name = 'gymnasts'
 
     def get_queryset(self):
-        return Gymnast.objects.filter(user=self.request.user)
+        # Retrieve gymnasts belonging to either parent1 or parent2
+        return Gymnast.objects.filter(Q(parent1=self.request.user) | Q(parent2=self.request.user))
