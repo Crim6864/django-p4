@@ -31,6 +31,9 @@
         {% empty %}
             <p>No gymnasts found.</p>
         {% endfor %}
+            <div class="nav-item mb-3">
+                <a class="btn btn-primary {% if url_name == 'add_gymnast' %}active{% endif %}" href="{% url 'add_gymnast' %}">Lägg till Gymnast</a>
+            </div>        
             </div>
             {% else %}
                 <!-- Profile doesn't exist -->

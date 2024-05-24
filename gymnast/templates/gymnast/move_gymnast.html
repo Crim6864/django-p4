@@ -5,8 +5,8 @@
     <div class="row">
         {% include 'dashboard/menu.html' %}
         <div class="col-sm-12 col-md-9 user-board">
-            <h1>Welcome, {{ request.user.profile.förnamn }}!</h1>
-            <h1>Move Gymnast to Another Group</h1>
+            <h1>Välkommen, {{ request.user.profile.förnamn }}!</h1>
+            <h1>Byt grupp</h1>
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
