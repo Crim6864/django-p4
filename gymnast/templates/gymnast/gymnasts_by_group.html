@@ -1,0 +1,59 @@
+<!-- gymnast/templates/gymnast/gymnasts_by_group.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container text-center">
+    <div class="row">
+        {% include 'dashboard/menu.html' %}
+        <div class="col-sm-12 col-md-9 user-board">
+            <h1>Alla gymnaster</h1>
+            
+            <!-- Dropdown for selecting group -->
+            <form method="get" action="{% url 'gymnasts_by_group' %}">
+                <div class="form-group">
+                    <label for="group">Select Group:</label>
+                    <select id="group" name="group" class="form-control" onchange="this.form.submit()">
+                        <option value="">-- Select Group --</option>
+                        {% for group in groups %}
+                            <option value="{{ group.id }}" {% if selected_group and selected_group.id == group.id %}selected{% endif %}>
+                                {{ group.name }} ({{ group.gymnast_set.count }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </form>
+
+            <!-- Display gymnasts in selected group -->
+            {% if selected_group %}
+                <h2>{{ selected_group.name }} ({{ selected_group.gymnast_set.count }})</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Förnamn</th>
+                            <th>Efternamn</th>
+                            <th>Förälder 1 telefon</th>
+                            <th>Förälder 2 telefon</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for gymnast in gymnasts %}
+                            <tr>
+                                <td>{{ gymnast.förnamn }}</td>
+                                <td>{{ gymnast.efternamn }}</td>
+                                <td>{{ gymnast.parent1.profile.telefon|default_if_none:"N/A" }}</td>
+                                <td>{{ gymnast.parent2.profile.telefon|default_if_none:"N/A" }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4">Inga gymnaster i denna grupp.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Välj en grupp för att se gymnaster.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

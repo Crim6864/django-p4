@@ -1,6 +1,6 @@
 <!-- menu.html -->
 <div class="col-sm-12 col-md-3 user-menu">
-    <h1>Profil Menu</h1>
+    <h1>Profil Meny</h1>
     <ul class="navbar-nav text-center ml-auto">
         <li class="nav-item active">
             <a class="nav-link {% if url_name == 'profile' %}active{% endif %}" href="{% url 'profile' request.user.id %}">Hem</a>
@@ -14,7 +14,7 @@
         <hr>
         <li class="nav-item">
             {% if request.user.gymnast_profile.all %}
-                <a class="nav-link {% if url_name == 'view_gymnast' %}active{% endif %}" href="{% url 'view_gymnast' request.user.gymnast_profile.first.id %}">Visa Gymnast</a>
+                <a class="nav-link {% if url_name == 'view_gymnast' %}active{% endif %}" href="{% url 'view_gymnast' request.user.gymnast_profile.first.id %}">Mina Gymnaster</a>
             {% else %}
                 <a class="nav-link {% if url_name == 'add_gymnast' %}active{% endif %}" href="{% url 'add_gymnast' %}">Lägg till Gymnast</a>
             {% endif %}
@@ -37,9 +37,16 @@
                 {% endif %}
             </li>
             <hr>
+            <!-- New link to view gymnasts by group -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'gymnasts_by_group' %}">Grupper</a>
+            </li>
+            <hr>
+            {% if user.is_superuser %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'admin:index' %}">Admin Panel</a>
             </li>
+            {% endif %}
         {% endif %}
     </ul>
 </div>

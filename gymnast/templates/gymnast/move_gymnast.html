@@ -1,3 +1,4 @@
+<!-- gymnast/templates/gymnast/move_gymnast.html -->
 {% extends 'base.html' %}
 
 {% block content %}
@@ -10,7 +11,18 @@
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Move Gymnast</button>
+            
+                <!-- Display list of gymnasts -->
+                <h2>Gymnasts</h2>
+                <ul class="gymnast-list">
+                    {% for gymnast in gymnasts %}
+                    <li class="gymnast-item">
+                        {{ gymnast.förnamn }} {{ gymnast.efternamn }} (Grupp: {{ gymnast.grupp }})
+                        <input type="checkbox" name="gymnasts" value="{{ gymnast.id }}">
+                    </li>
+                    {% endfor %}
+                </ul>
+                <button type="submit" class="btn btn-primary">Flytta Gymnast</button>
             </form>
         </div>
     </div>

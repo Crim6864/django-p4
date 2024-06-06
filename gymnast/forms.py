@@ -1,5 +1,6 @@
+# gymnast/forms.py
 from django import forms
-from .models import Gymnast
+from .models import Gymnast, GymnastGroup
 
 class GymnastForm(forms.ModelForm):
     class Meta:
@@ -21,3 +22,15 @@ class GymnastForm(forms.ModelForm):
         if parent1 and not parent1.is_superuser:
             raise forms.ValidationError("Only admins can edit parent2.")
         return parent2
+
+class AssignGroupForm(forms.ModelForm):
+    class Meta:
+        model = Gymnast
+        fields = ['grupp']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['grupp'].queryset = GymnastGroup.objects.all()
+
+class MoveGymnastForm(forms.Form):
+    gymnasts = forms.ModelMultipleChoiceField(queryset=Gymnast.objects.all(), widget=forms.CheckboxSelectMultiple)

@@ -1,3 +1,4 @@
+<!-- gymnast/templates/gymnast/add_gymnast.html -->
 {% extends 'base.html' %}
 
 {% block content %}
@@ -6,15 +7,13 @@
         {% include 'dashboard/menu.html' %}
         <div class="col-sm-12 col-md-9 user-board">
             <h1>Välkommen, {{ request.user.profile.förnamn }}!</h1>
-            <h1>Lägg till din Gymnast</h1>
+            <h1>Registrera gymnast</h1>
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-                {% if user.is_staff and second_parent %}
-                    <input type="hidden" name="parent2" value="{{ second_parent.id }}">
-                {% endif %}
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">Registrera Gymnast</button>
             </form>
+            <p>{{ queue_message }}</p>
         </div>
     </div>
 </div>

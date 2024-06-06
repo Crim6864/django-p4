@@ -1,7 +1,7 @@
 # gymnast/urls.py
 
 from django.urls import path
-from .views import AddGymnastView, EditGymnastView, DeleteGymnastView, MoveGymnastView, ViewGymnastView
+from .views import AddGymnastView, EditGymnastView, DeleteGymnastView, MoveGymnastView, ViewGymnastView, gymnasts_by_group_view
 
 urlpatterns = [
     path('add_gymnast/', AddGymnastView.as_view(), name='add_gymnast'),
@@ -9,4 +9,5 @@ urlpatterns = [
     path('delete_gymnast/<int:pk>/', DeleteGymnastView.as_view(), name='delete_gymnast'),
     path('move_gymnast/<int:pk>/', MoveGymnastView.as_view(), name='move_gymnast'),
     path('view_gymnast/<int:pk>/', ViewGymnastView.as_view(), name='view_gymnast'),
+    path('gymnasts/by-group/', gymnasts_by_group_view, name='gymnasts_by_group'),
 ]
